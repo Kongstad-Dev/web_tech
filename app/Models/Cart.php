@@ -67,6 +67,13 @@ class Cart extends Model
     public function checkout(PaymentGateway $paymentGateway) {
         // Implementation for the checkout process
     }
+    public function calculateTotal()
+    {
+        return $this->products->sum(function ($product) {
+            return $product->pivot->quantity * $product->price; // Assuming 'price' is a column in your 'products' table
+        });
+    }
+
 
 
 
